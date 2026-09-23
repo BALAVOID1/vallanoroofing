@@ -1,0 +1,4 @@
+export function Process() {
+  const steps = [["Message", "Send the postcode, a short description and safe photos."], ["Assess", "Jamie reviews the information and explains the sensible next step."], ["Agree", "Receive a clear scope for any proposed work before it begins."], ["Repair & record", "Complete the agreed repair and retain a clear record of the quoted work."]];
+  return <section className="section section-white" id="process" aria-labelledby="process-heading"><div className="shell"><p className="section-label">Simple enquiry process</p><h2 id="process-heading">A clear route from first message to finished repair</h2><div className="process-grid">{steps.map(([title, copy], i) => <article key={title}><span>{String(i + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{copy}</p></article>)}</div><p className="process-note">Photos provide useful initial context, but a safe inspection may still be needed before a diagnosis or quote.</p></div></section>;
+}

@@ -1,0 +1,5 @@
+import { ImageResponse } from "next/og";
+export const alt = "Vallano Roofing — repair-led roof repairs";
+export const size = { width: 1200, height: 630 };
+export const contentType = "image/png";
+export default function Image() { return new ImageResponse(<div style={{ background: "#000000", color: "#d9d9d9", width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "80px", borderTop: "22px solid #b6ccd7", fontFamily: "sans-serif" }}><div style={{ display: "flex", fontSize: 42, letterSpacing: 8, fontWeight: 800 }}>VALLANO&nbsp;<span style={{ color: "#d9d9d9" }}>ROOFING</span></div><div style={{ width: 90, height: 8, background: "#b6ccd7", margin: "56px 0 28px" }} /><div style={{ fontSize: 68, lineHeight: 1.08, fontWeight: 800, maxWidth: 960 }}>Roof repairs in Christleton, Rowton &amp; Waverton</div><div style={{ fontSize: 28, marginTop: 34, color: "#b6ccd7" }}>Repair-led • Small jobs welcome • 07990 101321</div></div>, size); }

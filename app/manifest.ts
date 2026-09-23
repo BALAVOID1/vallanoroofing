@@ -1,0 +1,2 @@
+import type { MetadataRoute } from "next";
+export default function manifest(): MetadataRoute.Manifest { return { name: "Vallano Roofing", short_name: "Vallano", description: "Repair-led roofing serving Christleton, Rowton and Waverton.", start_url: "/", display: "standalone", background_color: "#000000", theme_color: "#000000", icons: [{ src: "/brand/vallano-icon.png", sizes: "512x512", type: "image/png" }] }; }
