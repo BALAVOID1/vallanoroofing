@@ -28,3 +28,6 @@ footer{background:var(--black);color:#fff;padding:65px 0 22px}.footer-main{displ
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 @media(forced-colors:active){.button,.area-grid article,.measured-note{border:2px solid ButtonText}.hero-image{clip-path:none}.section-label,.eyebrow{color:LinkText}}
 .hero-image img{object-position:center top}
+.whatsapp-icon{flex:0 0 auto}.mobile-label{display:none}
+@media(max-width:760px){.header-inner{gap:12px}.logo-link{flex-basis:170px}.header-cta{width:auto;padding:0 12px;gap:7px;font-size:12px;white-space:nowrap}.header-cta:after{content:none}.header-cta .desktop-label{display:none}.header-cta .mobile-label{display:inline}}
+@media(max-width:370px){.logo-link{flex-basis:145px}}
