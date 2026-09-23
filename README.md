@@ -14,7 +14,7 @@ SITE_URL=https://example.test npm run build
 npm run test:e2e
 ```
 
-Set the real canonical `SITE_URL` before production deployment. Production origins must use HTTPS. See `.env.example`; unverified optional URLs stay unset and are omitted from rendered content/schema.
+Set the real canonical `SITE_URL` before production deployment when a custom domain is available. On Netlify, builds fall back to its HTTPS `URL` environment variable, so the first deployment does not require manual configuration. See `.env.example`; unverified optional URLs stay unset and are omitted from rendered content/schema.
 
 ## Content and assets
 
@@ -25,7 +25,7 @@ Set the real canonical `SITE_URL` before production deployment. Production origi
 
 ## Deployment
 
-Configure the preferred HTTPS host as `SITE_URL`. At the platform/DNS layer, permanently redirect HTTP and the alternate hostname to that origin while preserving paths and query strings. Next.js consistently emits clean, non-trailing-slash canonicals; campaign query strings therefore remain usable while canonicalising to `/`.
+Configure the preferred HTTPS host as `SITE_URL` after connecting a custom domain. Until then, the Netlify-provided site URL is used automatically. At the platform/DNS layer, permanently redirect HTTP and the alternate hostname to that origin while preserving paths and query strings. Next.js consistently emits clean, non-trailing-slash canonicals; campaign query strings therefore remain usable while canonicalising to `/`.
 
 After deployment, validate the live output in Schema.org Validator and Google Rich Results Test. FAQ schema describes visible content, but no rich-result eligibility is promised. Run a mobile Lighthouse audit and submit the generated sitemap through Search Console.
 

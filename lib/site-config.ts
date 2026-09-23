@@ -1,19 +1,31 @@
 const FALLBACK_DEV_URL = "http://localhost:3000";
 
-function siteOrigin(): string {
-  const supplied = process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL;
+type SiteEnvironment = Partial<Record<
+  "SITE_URL" | "NEXT_PUBLIC_SITE_URL" | "URL" | "DEPLOY_PRIME_URL" | "DEPLOY_URL" | "NODE_ENV",
+  string
+>>;
+
+export function resolveSiteOrigin(
+  environment: SiteEnvironment = process.env,
+  isBrowser = typeof window !== "undefined"
+): string {
+  const supplied = environment.SITE_URL
+    || environment.NEXT_PUBLIC_SITE_URL
+    || environment.URL
+    || environment.DEPLOY_PRIME_URL
+    || environment.DEPLOY_URL;
   if (!supplied) {
     // Server-only SITE_URL is deliberately absent from the browser bundle.
     // Client components import this module only for public contact constants.
-    if (typeof window !== "undefined") return FALLBACK_DEV_URL;
-    if (process.env.NODE_ENV === "production") {
-      throw new Error("SITE_URL is required in production and must be the canonical HTTPS origin.");
+    if (isBrowser) return FALLBACK_DEV_URL;
+    if (environment.NODE_ENV === "production") {
+      throw new Error("SITE_URL or a Netlify deployment URL is required in production and must use HTTPS.");
     }
     return FALLBACK_DEV_URL;
   }
   const url = new URL(supplied);
-  if (process.env.NODE_ENV === "production" && url.protocol !== "https:") {
-    throw new Error("SITE_URL must use HTTPS in production.");
+  if (environment.NODE_ENV === "production" && url.protocol !== "https:") {
+    throw new Error("The production site URL must use HTTPS.");
   }
   return url.origin;
 }
@@ -23,7 +35,7 @@ export const whatsappMessage = "Hello Jamie, I need help with a roof problem. My
 export const siteConfig = {
   name: "Vallano Roofing",
   contactName: "Jamie",
-  url: siteOrigin(),
+  url: resolveSiteOrigin(),
   phoneDisplay: "07990 101321",
   phoneInternational: "+44 7990 101321",
   phoneHref: "tel:+447990101321",
