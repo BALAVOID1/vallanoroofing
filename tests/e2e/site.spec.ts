@@ -157,8 +157,8 @@ test("Waverton presents its own chimney-side slate repair case study", async ({ 
 test("new service pages are unique, crawlable and internally linked", async ({ page, request }) => {
   const sitemap = await (await request.get("/sitemap.xml")).text();
   const services = [
-    ["slate-roof-repairs", "Slate Roof Repairs in Chester | Vallano Roofing", "Slate roof repairs", "Repairing the defect while retaining sound slates"],
-    ["chimney-flashing-repairs", "Chimney Flashing Repairs in Chester | Vallano Roofing", "Chimney flashing repairs", "A leak near a chimney is not automatically a flashing failure"]
+    ["slate-roof-repairs", "Slate Roof Repairs in Christleton, Rowton & Waverton | Vallano Roofing", "Slate roof repairs in Christleton, Rowton & Waverton", "Repairing the defect while retaining sound slates"],
+    ["chimney-flashing-repairs", "Chimney Flashing Repairs in Christleton, Rowton & Waverton | Vallano Roofing", "Chimney flashing repairs in Christleton, Rowton & Waverton", "A leak near a chimney is not automatically a flashing failure"]
   ] as const;
 
   for (const [slug, title, heading, introduction] of services) {
@@ -171,7 +171,7 @@ test("new service pages are unique, crawlable and internally linked", async ({ p
     await expect(page.locator("h1")).toContainText(heading);
     await expect(page.locator("#service-introduction-heading")).toContainText(introduction);
     await expect(page.locator(".guidance-grid article")).toHaveCount(3);
-    await expect(page.locator(".faq-list details")).toHaveCount(4);
+    await expect(page.locator(".faq-list details")).toHaveCount(5);
     await expect(page.locator('.area-grid a[href^="/roof-repairs/"]')).toHaveCount(3);
     const schema = await page.locator('script[type="application/ld+json"]').textContent();
     expect(schema).toContain("BreadcrumbList");
@@ -191,7 +191,8 @@ test("service pages use verified project evidence without unsupported locations"
   await page.goto("/slate-roof-repairs");
   const slateEvidence = page.locator(".service-evidence");
   await expect(slateEvidence.locator("article")).toHaveCount(3);
-  await expect(slateEvidence).toContainText("Christleton");
+  await expect(slateEvidence).toContainText("Vallano completed work");
+  await expect(slateEvidence).not.toContainText("Location not published");
   await expect(slateEvidence).toContainText("Rowton");
   await expect(slateEvidence).toContainText("Waverton");
 

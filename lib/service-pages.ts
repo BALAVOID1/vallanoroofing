@@ -2,18 +2,19 @@ export const servicePages = [
   {
     slug: "slate-roof-repairs",
     name: "Slate roof repairs",
-    title: "Slate Roof Repairs in Chester | Vallano Roofing",
-    description: "Targeted slate roof repairs for slipped, broken and missing slates across Christleton, Rowton, Waverton and surrounding Chester areas.",
+    title: "Slate Roof Repairs in Christleton, Rowton & Waverton | Vallano Roofing",
+    description: "Local slate roof repairs in Christleton, Rowton and Waverton for slipped, cracked, broken or missing slates. Targeted repairs by Vallano Roofing.",
     hero: {
       eyebrow: "Repair-led slate roofing",
-      heading: "Slate roof repairs",
-      emphasis: "carefully scoped",
-      lede: "Help with slipped, cracked, broken or missing slates, including localised defects around chimneys, flues, gables and other roof junctions.",
+      heading: "Slate roof repairs in",
+      emphasis: "Christleton, Rowton & Waverton",
+      lede: "Local help with slipped, cracked, broken or missing slates across Christleton, Rowton and Waverton, including defects around chimneys, flues, gables and other roof junctions.",
       image: { src: "/work/slate-gable-completed-repair.jpeg", width: 1600, height: 1200, alt: "Completed Welsh slate and leadwork repair at a stone gable" }
     },
     introduction: {
       title: "Repairing the defect while retaining sound slates",
       paragraphs: [
+        "Vallano Roofing provides slate roof repairs in Christleton, Rowton and Waverton, with small and localised repair enquiries welcome where the condition of the roof makes a targeted repair suitable.",
         "A small area of visible slate damage does not automatically mean the whole roof needs replacing. Vallano reviews the available evidence, checks the surrounding covering and defines a targeted scope where the roof’s condition makes that suitable.",
         "The repair may involve more than replacing the visible slate. Failed underlay, deteriorated battens or insecure fixings can sit beneath an opening, so the final scope must follow what can be confirmed safely rather than assumptions made from a distant photograph."
       ]
@@ -36,9 +37,9 @@ export const servicePages = [
       ]
     },
     evidenceTitle: "Slate repairs shown in completed-work case studies",
-    evidenceIntroduction: "These documented projects show different reasons a slate covering may need attention. Each link explains the reported problem, inspection findings and completed work without claiming that every roof requires the same solution.",
+    evidenceIntroduction: "These documented projects show different reasons a slate covering may need attention. Each example explains the reported problem, inspection findings and completed work without claiming that every roof requires the same solution.",
     evidence: [
-      { area: "Christleton", href: "/roof-repairs/christleton", image: { src: "/work/slate-gable-completed-repair.jpeg", width: 1600, height: 1200, alt: "Completed Welsh slate and leadwork repair at a stone gable" }, title: "Slate and gable-junction repair", text: "Missing and broken Welsh slates were repaired alongside missing leadwork and cracked ridge components." },
+      { area: "Vallano completed work", href: undefined, image: { src: "/work/slate-gable-completed-repair.jpeg", width: 1600, height: 1200, alt: "Completed Welsh slate and leadwork repair at a stone gable" }, title: "Slate and gable-junction repair", text: "Missing and broken Welsh slates were repaired alongside missing leadwork and cracked ridge components." },
       { area: "Rowton", href: "/roof-repairs/rowton", image: { src: "/work/rowton-flue-slate-repair-completed.jpeg", width: 1600, height: 1200, alt: "Completed slate repair around a boiler flue" }, title: "Slate repair around a boiler flue", text: "An exposed area around a newly installed flue was rebuilt using new supporting layers and serviceable available slates." },
       { area: "Waverton", href: "/roof-repairs/waverton", image: { src: "/work/waverton-chimney-slate-repair-completed.jpeg", width: 1600, height: 1200, alt: "Completed chimney-side repair with two larger Welsh slates" }, title: "Wind-damaged chimney-side slates", text: "Slates lost in high winds led to a local repair of the covering and confirmed deterioration beneath it." }
     ],
@@ -47,24 +48,26 @@ export const servicePages = [
       ["Can one or two missing slates be repaired?", "Often a localised repair is possible, but suitability depends on the surrounding slates, available fixing points and the condition of the underlay and battens beneath."],
       ["Do broken slates mean I need a new roof?", "Not necessarily. Vallano prioritises a proportionate repair where the wider roof remains serviceable, but the roof’s actual condition must determine the recommendation."],
       ["Can you match existing roof slates?", "The dimensions, thickness, colour and condition of the existing covering need to be considered. Vallano will explain the practical options for the specific repair rather than promise an exact match before assessment."],
+      ["Do you repair slate roofs in Christleton, Rowton and Waverton?", "Yes. Vallano Roofing welcomes slate repair enquiries from Christleton, Rowton and Waverton, including slipped, cracked, broken or missing slates where a targeted repair is suitable."],
       ["What should I send for an initial review?", "Send the property postcode, when the damage or leak was noticed, where it appears and photographs taken safely from ground level or inside. Never climb onto the roof." ]
     ]
   },
   {
     slug: "chimney-flashing-repairs",
     name: "Chimney flashing repairs",
-    title: "Chimney Flashing Repairs in Chester | Vallano Roofing",
-    description: "Repair-led help for suspected chimney flashing and leadwork defects across Christleton, Rowton, Waverton and surrounding Chester areas.",
+    title: "Chimney Flashing Repairs in Christleton, Rowton & Waverton | Vallano Roofing",
+    description: "Chimney flashing and leadwork repairs in Christleton, Rowton and Waverton. Careful assessment and targeted repairs by Vallano Roofing.",
     hero: {
       eyebrow: "Chimney and leadwork details",
-      heading: "Chimney flashing repairs",
-      emphasis: "based on the cause",
-      lede: "Assessment and targeted repair of confirmed defects where lead flashing connects a chimney to the surrounding roof covering.",
+      heading: "Chimney flashing repairs in",
+      emphasis: "Christleton, Rowton & Waverton",
+      lede: "Assessment and targeted chimney flashing repairs across Christleton, Rowton and Waverton where leadwork connects a chimney to the surrounding roof covering.",
       image: { src: "/work/chimney-flashing-repair-completed-side.jpeg", width: 1600, height: 1200, alt: "Completed lead flashing and reinstated slate covering beside a stone chimney" }
     },
     introduction: {
       title: "A leak near a chimney is not automatically a flashing failure",
       paragraphs: [
+        "Vallano Roofing investigates suspected chimney flashing and leadwork defects in Christleton, Rowton and Waverton, then defines a repair around the likely route of water entry and the condition found.",
         "Lead flashing helps weather the junction between a chimney and the roof covering. If that detail is loose, split, missing or no longer correctly dressed into the surrounding materials, a focused repair may be appropriate.",
         "Water seen near a chimney can also originate from damaged slates or tiles, pointing, the chimney structure or another defect higher up the roof. Vallano works to identify the likely route of entry before defining a repair, rather than replacing leadwork solely because the internal damp appears nearby."
       ]
@@ -107,6 +110,7 @@ export const servicePages = [
       ["Does damp near a chimney always mean the flashing has failed?", "No. The surrounding roof covering, chimney pointing and other details can also allow water entry. The likely cause should be assessed before a flashing repair is specified."],
       ["Can chimney flashing be repaired without replacing the roof?", "A targeted repair may be suitable where the defect is localised and the surrounding roof remains serviceable. The condition found must determine the scope."],
       ["Do you use lead for chimney flashing repairs?", "Leadwork is used where it is appropriate to the existing detail and agreed repair. The required material, laps and fixing arrangement depend on the roof and junction being repaired."],
+      ["Do you repair chimney flashing in Christleton, Rowton and Waverton?", "Yes. Vallano Roofing welcomes enquiries about suspected chimney flashing and leadwork defects from Christleton, Rowton and Waverton. The chimney and surrounding roof details are assessed before a repair is proposed."],
       ["What photographs should I send?", "Send safely taken views of the chimney and surrounding roof from ground level, together with internal staining and a note of when it appears. Never climb onto the roof to obtain photographs."]
     ]
   }

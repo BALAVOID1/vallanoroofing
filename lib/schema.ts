@@ -104,7 +104,7 @@ export function buildServicePageSchema(service: ServicePage) {
         primaryImageOfPage: { "@type": "ImageObject", url: `${siteConfig.url}${service.hero.image.src}` }
       },
       {
-        "@type": "Service", "@id": `${url}#service`, name: service.name,
+        "@type": "Service", "@id": `${url}#service`, name: `${service.name} in Christleton, Rowton and Waverton`,
         description: service.description, provider: { "@id": `${root}#business` },
         areaServed: siteConfig.areas.map((area) => ({ "@type": "Place", name: `${area}, Cheshire, United Kingdom` }))
       },
