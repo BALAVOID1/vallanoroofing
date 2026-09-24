@@ -191,9 +191,13 @@ test("service pages use verified project evidence without unsupported locations"
   await page.goto("/slate-roof-repairs");
   const slateEvidence = page.locator(".service-evidence");
   await expect(slateEvidence.locator("article")).toHaveCount(3);
-  await expect(slateEvidence).toContainText("Vallano completed work");
   await expect(slateEvidence).not.toContainText("Location not published");
-  await expect(slateEvidence.locator('a[href="/roof-repairs/christleton"]')).toHaveText(/Slate roof repairs in Christleton/);
+  for (const area of ["christleton", "rowton", "waverton"]) {
+    const link = slateEvidence.locator(`a[href="/roof-repairs/${area}"]`);
+    await expect(link).toHaveCount(1);
+    await expect(link).toHaveText(/Read the completed-work case study/);
+  }
+  await expect(slateEvidence).toContainText("Christleton");
   await expect(slateEvidence).toContainText("Rowton");
   await expect(slateEvidence).toContainText("Waverton");
 
