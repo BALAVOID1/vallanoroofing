@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { buildSchema } from "@/lib/schema";
+import { buildLocationSchema, buildSchema } from "@/lib/schema";
+import { locations } from "@/lib/locations";
 import { resolveSiteOrigin, siteConfig, whatsappHref, whatsappMessage } from "@/lib/site-config";
 
 describe("verified central configuration", () => {
@@ -14,6 +15,22 @@ describe("verified central configuration", () => {
     for (const forbidden of ["address", "aggregateRating", "openingHours", "email", "PostalAddress", "hasMap"]) expect(json).not.toContain(`\"${forbidden}\"`);
     expect(json).toContain("RoofingContractor");
     expect(json).toContain("FAQPage");
+  });
+  it("defines three unique, schema-ready location pages", () => {
+    expect(locations).toHaveLength(3);
+    expect(new Set(locations.map(({ slug }) => slug)).size).toBe(3);
+    expect(new Set(locations.map(({ title }) => title)).size).toBe(3);
+    for (const location of locations) {
+      const json = JSON.stringify(buildLocationSchema(location));
+      expect(() => JSON.parse(json)).not.toThrow();
+      expect(json).toContain("BreadcrumbList");
+      expect(json).toContain("Service");
+      expect(json).toContain(`${location.name}, Cheshire, United Kingdom`);
+    }
+    expect(locations.filter(({ workExample }) => "images" in workExample).map(({ slug }) => slug)).toEqual(["christleton", "rowton", "waverton"]);
+    expect(new Set(locations.map(({ guidance }) => guidance.title)).size).toBe(3);
+    expect(new Set(locations.map(({ guidance }) => guidance.introduction)).size).toBe(3);
+    for (const location of locations) expect(location.guidance.items).toHaveLength(3);
   });
   it("uses an explicit canonical URL before Netlify deployment URLs", () => {
     expect(resolveSiteOrigin({
