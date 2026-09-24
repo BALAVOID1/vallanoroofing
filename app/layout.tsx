@@ -14,7 +14,13 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } },
   openGraph: { title: siteConfig.title, description: siteConfig.description, url: "/", siteName: siteConfig.name, locale: "en_GB", type: "website", images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Vallano Roofing — repair-led roof repairs" }] },
   twitter: { card: "summary_large_image", title: siteConfig.title, description: siteConfig.description, images: ["/opengraph-image"] },
-  icons: { icon: siteConfig.icon, apple: "/apple-icon" },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" },
+      { url: siteConfig.icon, sizes: "512x512", type: "image/png" }
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "512x512", type: "image/png" }]
+  },
   manifest: "/manifest.webmanifest",
   verification: siteConfig.verification ? { google: siteConfig.verification } : undefined
 };
