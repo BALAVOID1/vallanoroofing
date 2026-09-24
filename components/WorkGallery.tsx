@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const work = [
   ["/work/slate-roof-detail.webp", "Slate roof repair with damaged slates replaced", "Slate roof repair – damaged slates replaced"],
-  ["/work/chimney-leadwork-detail.webp", "Chimney leadwork with defective flashing repaired", "Chimney leadwork – defective flashing repaired"],
+  ["/work/chimney-leadwork-detail.webp", "Leadwork at the junction between a chimney and roof covering", "Chimney and roof leadwork detail"],
   ["/work/roof-abutment-detail.webp", "Roof abutment with a new lead detail installed", "Roof abutment – new lead detail installed"]
 ] as const;
 

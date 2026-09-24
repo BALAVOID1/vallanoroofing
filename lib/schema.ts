@@ -2,6 +2,8 @@ import { faqs, services } from "./content";
 import { siteConfig } from "./site-config";
 import type { Location } from "./locations";
 import { locationPath } from "./locations";
+import type { ServicePage } from "./service-pages";
+import { servicePath } from "./service-pages";
 
 export function buildSchema() {
   const root = `${siteConfig.url}/`;
@@ -77,6 +79,46 @@ export function buildLocationSchema(location: Location) {
           "@type": "Question",
           name,
           acceptedAnswer: { "@type": "Answer", text: answer }
+        }))
+      }
+    ]
+  };
+}
+
+export function buildServicePageSchema(service: ServicePage) {
+  const root = `${siteConfig.url}/`;
+  const url = `${siteConfig.url}${servicePath(service)}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "RoofingContractor", "@id": `${root}#business`, name: siteConfig.name,
+        url: root, telephone: siteConfig.phoneInternational,
+        areaServed: siteConfig.areas.map((area) => ({ "@type": "Place", name: `${area}, Cheshire, United Kingdom` }))
+      },
+      {
+        "@type": "WebPage", "@id": `${url}#webpage`, url, name: service.title,
+        description: service.description, about: { "@id": `${url}#service` },
+        isPartOf: { "@id": `${root}#website` }, breadcrumb: { "@id": `${url}#breadcrumb` },
+        primaryImageOfPage: { "@type": "ImageObject", url: `${siteConfig.url}${service.hero.image.src}` }
+      },
+      {
+        "@type": "Service", "@id": `${url}#service`, name: service.name,
+        description: service.description, provider: { "@id": `${root}#business` },
+        areaServed: siteConfig.areas.map((area) => ({ "@type": "Place", name: `${area}, Cheshire, United Kingdom` }))
+      },
+      {
+        "@type": "BreadcrumbList", "@id": `${url}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: root },
+          { "@type": "ListItem", position: 2, name: service.name, item: url }
+        ]
+      },
+      {
+        "@type": "FAQPage", "@id": `${url}#faq`,
+        mainEntity: service.faqs.map(([name, answer]) => ({
+          "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text: answer }
         }))
       }
     ]

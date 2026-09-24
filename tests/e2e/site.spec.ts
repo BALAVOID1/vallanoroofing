@@ -153,3 +153,57 @@ test("Waverton presents its own chimney-side slate repair case study", async ({ 
     await expect(image).toHaveAttribute("alt", /.+/);
   }
 });
+
+test("new service pages are unique, crawlable and internally linked", async ({ page, request }) => {
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  const services = [
+    ["slate-roof-repairs", "Slate Roof Repairs in Chester | Vallano Roofing", "Slate roof repairs", "Repairing the defect while retaining sound slates"],
+    ["chimney-flashing-repairs", "Chimney Flashing Repairs in Chester | Vallano Roofing", "Chimney flashing repairs", "A leak near a chimney is not automatically a flashing failure"]
+  ] as const;
+
+  for (const [slug, title, heading, introduction] of services) {
+    const path = `/${slug}`;
+    expect(sitemap).toContain(`https://vallano.example${path}`);
+    await page.goto(path);
+    await expect(page).toHaveTitle(title);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://vallano.example${path}`);
+    await expect(page.locator("h1")).toHaveCount(1);
+    await expect(page.locator("h1")).toContainText(heading);
+    await expect(page.locator("#service-introduction-heading")).toContainText(introduction);
+    await expect(page.locator(".guidance-grid article")).toHaveCount(3);
+    await expect(page.locator(".faq-list details")).toHaveCount(4);
+    await expect(page.locator('.area-grid a[href^="/roof-repairs/"]')).toHaveCount(3);
+    const schema = await page.locator('script[type="application/ld+json"]').textContent();
+    expect(schema).toContain("BreadcrumbList");
+    expect(schema).toContain("FAQPage");
+    expect(schema).toContain("Service");
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
+    const accessibility = await new AxeBuilder({ page: page as never }).analyze();
+    expect(accessibility.violations).toEqual([]);
+  }
+
+  await page.goto("/");
+  await expect(page.locator('#services a[href="/slate-roof-repairs"]')).toHaveCount(1);
+  await expect(page.locator('#services a[href="/chimney-flashing-repairs"]')).toHaveCount(1);
+});
+
+test("service pages use verified project evidence without unsupported locations", async ({ page }) => {
+  await page.goto("/slate-roof-repairs");
+  const slateEvidence = page.locator(".service-evidence");
+  await expect(slateEvidence.locator("article")).toHaveCount(3);
+  await expect(slateEvidence).toContainText("Christleton");
+  await expect(slateEvidence).toContainText("Rowton");
+  await expect(slateEvidence).toContainText("Waverton");
+
+  await page.goto("/chimney-flashing-repairs");
+  const chimneyCaseStudy = page.locator(".service-case-file");
+  await expect(chimneyCaseStudy).toContainText("Three-storey chimney flashing and slate repair");
+  await expect(chimneyCaseStudy).toContainText("daylight visible through a gap");
+  await expect(chimneyCaseStudy).toContainText("600 mm-wide Code 4 lead");
+  await expect(chimneyCaseStudy).toContainText("three levels of access");
+  await expect(chimneyCaseStudy.locator(".case-file-gallery figure")).toHaveCount(3);
+  await expect(chimneyCaseStudy.locator(".case-file-gallery img")).toHaveCount(3);
+  await expect(chimneyCaseStudy).not.toContainText("Rowton");
+  await expect(chimneyCaseStudy).not.toContainText("Waverton");
+  await expect(chimneyCaseStudy).not.toContainText("Christleton");
+});

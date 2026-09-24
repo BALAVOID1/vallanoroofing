@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { buildLocationSchema, buildSchema } from "@/lib/schema";
+import { buildLocationSchema, buildSchema, buildServicePageSchema } from "@/lib/schema";
 import { locations } from "@/lib/locations";
+import { servicePages, servicePath } from "@/lib/service-pages";
 import { resolveSiteOrigin, siteConfig, whatsappHref, whatsappMessage } from "@/lib/site-config";
 
 describe("verified central configuration", () => {
@@ -31,6 +32,18 @@ describe("verified central configuration", () => {
     expect(new Set(locations.map(({ guidance }) => guidance.title)).size).toBe(3);
     expect(new Set(locations.map(({ guidance }) => guidance.introduction)).size).toBe(3);
     for (const location of locations) expect(location.guidance.items).toHaveLength(3);
+  });
+  it("defines two unique, schema-ready service pages", () => {
+    expect(servicePages.map(({ slug }) => slug)).toEqual(["slate-roof-repairs", "chimney-flashing-repairs"]);
+    expect(new Set(servicePages.map(({ title }) => title)).size).toBe(2);
+    for (const service of servicePages) {
+      expect(servicePath(service)).toBe(`/${service.slug}`);
+      const json = JSON.stringify(buildServicePageSchema(service));
+      expect(() => JSON.parse(json)).not.toThrow();
+      expect(json).toContain("BreadcrumbList");
+      expect(json).toContain("FAQPage");
+      expect(json).toContain("Service");
+    }
   });
   it("uses an explicit canonical URL before Netlify deployment URLs", () => {
     expect(resolveSiteOrigin({
