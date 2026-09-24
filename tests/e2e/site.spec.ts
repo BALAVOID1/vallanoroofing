@@ -193,6 +193,7 @@ test("service pages use verified project evidence without unsupported locations"
   await expect(slateEvidence.locator("article")).toHaveCount(3);
   await expect(slateEvidence).toContainText("Vallano completed work");
   await expect(slateEvidence).not.toContainText("Location not published");
+  await expect(slateEvidence.locator('a[href="/roof-repairs/christleton"]')).toHaveText(/Slate roof repairs in Christleton/);
   await expect(slateEvidence).toContainText("Rowton");
   await expect(slateEvidence).toContainText("Waverton");
 
