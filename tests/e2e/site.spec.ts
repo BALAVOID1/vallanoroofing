@@ -106,7 +106,7 @@ test("completed-work example does not claim a Christleton project location", asy
 test("Rowton presents its own flue repair case study", async ({ page }) => {
   await page.goto("/roof-repairs/rowton");
   const heroImage = page.locator(".location-hero img");
-  await expect(heroImage).toHaveAttribute("src", /rowton-flue-roof-damage\.jpeg/);
+  await expect(heroImage).toHaveAttribute("src", /boiler-flue-slate-damage-before\.jpeg/);
   await expect(heroImage).toHaveAttribute("alt", "Broken and missing slates exposing the roof beside a newly installed boiler flue");
   const caseFile = page.locator(".case-file");
   await expect(caseFile).toContainText("Emergency slate repair around a new boiler flue");
@@ -133,7 +133,7 @@ test("Rowton presents its own flue repair case study", async ({ page }) => {
 test("Waverton presents its own chimney-side slate repair case study", async ({ page }) => {
   await page.goto("/roof-repairs/waverton");
   const heroImage = page.locator(".location-hero img");
-  await expect(heroImage).toHaveAttribute("src", /waverton-chimney-timber-inspection\.jpeg/);
+  await expect(heroImage).toHaveAttribute("src", /chimney-side-timber-inspection\.jpeg/);
   await expect(heroImage).toHaveAttribute("alt", "Roof opened beside a chimney to inspect failed battens, underlay and timber");
   const guidance = page.locator(".homeowner-guidance");
   await expect(guidance).toContainText("What to check after a Waverton roof loses slates in high winds");

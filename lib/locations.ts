@@ -48,7 +48,7 @@ export const locations = [
     postcode: "CH3",
     title: "Roof Repairs in Rowton | Vallano Roofing",
     description: "A repair-led roofer serving Rowton for leaking roofs, tiles, slates, leadwork, valleys and suitable flat-roof repairs. Small jobs are welcome.",
-    heroImage: { src: "/work/rowton-flue-roof-damage.jpeg", width: 1600, height: 1200, alt: "Broken and missing slates exposing the roof beside a newly installed boiler flue" },
+    heroImage: { src: "/work/boiler-flue-slate-damage-before.jpeg", width: 1600, height: 1200, alt: "Broken and missing slates exposing the roof beside a newly installed boiler flue" },
     workExample: {
       title: "Emergency slate repair around a new boiler flue",
       summary: "An older homeowner contacted Vallano Roofing after a new boiler flue had been fitted through her cottage roof. Slates around the opening had been left broken or missing, exposing the roof to rain. After paying for the boiler and flue installation, she had no money left for the urgent roof repair. Jamie provided a practical solution using the serviceable slates available at the property, completed the labour without charge and covered the additional repair materials.",
@@ -60,10 +60,10 @@ export const locations = [
       materials: ["Roofing underlay", "50 mm × 25 mm blue roofing battens", "70 mm batten-fixing screws", "Galvanised slate and clout nails", "Lead slate straps", "Serviceable reclaimed slates available at the property"],
       detail: "The slates were mechanically fixed where possible using galvanised nails. Lead straps provided additional secure fixing where the reclaimed slates could not be conventionally nailed, allowing the covering to be completed with the materials available.",
       images: [
-        { src: "/work/rowton-flue-roof-damage.jpeg", width: 1600, height: 1200, alt: "Broken and missing slates exposing the roof beside a newly installed boiler flue", caption: "Before repair — broken and missing slates left openings around the new flue" },
-        { src: "/work/rowton-flue-slate-repair-preparation.jpeg", width: 1600, height: 1200, alt: "Available reclaimed slates being sorted beside the exposed flue area", caption: "Repair preparation — serviceable slates selected for cutting and refitting" },
-        { src: "/work/rowton-flue-roof-rebuild.jpeg", width: 1600, height: 1200, alt: "Slate covering being reinstated over repaired battens and underlay around a boiler flue", caption: "During repair — the exposed area rebuilt and slates secured around the flue" },
-        { src: "/work/rowton-flue-slate-repair-completed.jpeg", width: 1600, height: 1200, alt: "Completed watertight slate repair surrounding a boiler flue on a cottage roof", caption: "Completed work — a practical, watertight covering reinstated with the available slates" }
+        { src: "/work/boiler-flue-slate-damage-before.jpeg", width: 1600, height: 1200, alt: "Broken and missing slates exposing the roof beside a newly installed boiler flue", caption: "Before repair — broken and missing slates left openings around the new flue" },
+        { src: "/work/broken-slate-repair-work.jpeg", width: 1600, height: 1200, alt: "Available reclaimed slates being sorted beside the exposed flue area", caption: "Repair preparation — serviceable slates selected for cutting and refitting" },
+        { src: "/work/boiler-flue-slate-rebuild.jpeg", width: 1600, height: 1200, alt: "Slate covering being reinstated over repaired battens and underlay around a boiler flue", caption: "During repair — the exposed area rebuilt and slates secured around the flue" },
+        { src: "/work/boiler-flue-slate-repair-completed.jpeg", width: 1600, height: 1200, alt: "Completed watertight slate repair surrounding a boiler flue on a cottage roof", caption: "Completed work — a practical, watertight covering reinstated with the available slates" }
       ]
     },
     introduction: "Vallano Roofing serves Rowton with repair-led help for roof leaks and localised defects. Small repair enquiries are welcome, and the proposed scope is explained before agreed work begins.",
@@ -91,7 +91,7 @@ export const locations = [
     postcode: "CH3",
     title: "Roof Repairs in Waverton | Vallano Roofing",
     description: "Roof repairs in Waverton for leaks, damaged tiles and slates, leadwork, valleys and suitable flat roofs, with a clear repair-led approach.",
-    heroImage: { src: "/work/waverton-chimney-timber-inspection.jpeg", width: 1600, height: 1200, alt: "Roof opened beside a chimney to inspect failed battens, underlay and timber" },
+    heroImage: { src: "/work/chimney-side-timber-inspection.jpeg", width: 1600, height: 1200, alt: "Roof opened beside a chimney to inspect failed battens, underlay and timber" },
     workExample: {
       title: "Wind-damaged slate repair beside a chimney",
       summary: "A homeowner contacted Vallano Roofing after several slates beside her chimney were lost during high winds. The defect was identified in the report prepared for the sale of her home, so she needed a focused repair to make the roof sound without undertaking unnecessary wider work.",
@@ -104,9 +104,9 @@ export const locations = [
       detail: "Two larger Welsh slates were purchased, prepared and securely fitted into the repaired area beside the chimney. The limited scope dealt with the missing covering and the deterioration discovered beneath it while retaining the surrounding serviceable roof covering.",
       images: [
         { src: "/work/chimney-flashing-repair-work.jpeg", width: 1600, height: 1200, alt: "Missing slates and exposed roof area below a chimney before repair", caption: "Before repair — slates lost in high winds left the roof exposed beside the chimney" },
-        { src: "/work/waverton-chimney-slate-damage.jpeg", width: 1600, height: 1200, alt: "Damaged and missing slates around the base of a chimney", caption: "Initial inspection — the localised slate damage around the chimney" },
-        { src: "/work/waverton-chimney-timber-inspection.jpeg", width: 1600, height: 1200, alt: "Roof opened beside a chimney to reveal failed battens underlay and timber", caption: "During inspection — the failed underlay, rotten battens and affected timber area exposed" },
-        { src: "/work/waverton-chimney-slate-repair-completed.jpeg", width: 1600, height: 1200, alt: "Two larger Welsh slates fitted to complete a chimney-side roof repair", caption: "Completed work — new Welsh slates fitted over the repaired underlay and battens" }
+        { src: "/work/chimney-side-slate-damage-before.jpeg", width: 1600, height: 1200, alt: "Damaged and missing slates around the base of a chimney", caption: "Initial inspection — the localised slate damage around the chimney" },
+        { src: "/work/chimney-side-timber-inspection.jpeg", width: 1600, height: 1200, alt: "Roof opened beside a chimney to reveal failed battens underlay and timber", caption: "During inspection — the failed underlay, rotten battens and affected timber area exposed" },
+        { src: "/work/chimney-side-slate-repair-completed.jpeg", width: 1600, height: 1200, alt: "Two larger Welsh slates fitted to complete a chimney-side roof repair", caption: "Completed work — new Welsh slates fitted over the repaired underlay and battens" }
       ]
     },
     introduction: "Vallano Roofing serves Waverton with careful roof fault-finding and clearly scoped, targeted repairs. Jamie reviews the details you send and explains the appropriate next step rather than assuming that a leaking roof needs replacing.",

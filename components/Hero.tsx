@@ -17,7 +17,7 @@ export function Hero() {
         <ul className="trust-list"><li>26 years’ trade experience</li><li>Targeted repairs first</li><li>12-month workmanship guarantee on quoted work</li></ul>
       </div>
       <div className="hero-media">
-        <div className="hero-image"><Image src="/work/roof-repairs-christleton-rowton-waverton-vallano-roofing.jpeg" alt="Completed lead abutment flashing repair on a tiled roof by Vallano Roofing" width={1200} height={1600} priority sizes="(max-width: 800px) 100vw, 43vw" /></div>
+        <div className="hero-image"><Image src="/work/completed-lead-abutment-flashing.jpeg" alt="Completed lead abutment flashing repair on a tiled roof by Vallano Roofing" width={1200} height={1600} priority sizes="(max-width: 800px) 100vw, 43vw" /></div>
         <div className="hero-card"><span className="kicker">Get a clear next step</span><h2>Send Jamie your postcode + safe photos</h2><p>Tell us the problem and whether the leak is active now.</p><ContactLink className="button button-brand" href={whatsappHref()} target="_blank" rel="noopener noreferrer" kind="whatsapp" placement="hero">Open WhatsApp enquiry <span aria-hidden="true">→</span></ContactLink><small>Never climb onto the roof.</small></div>
       </div>
     </div>

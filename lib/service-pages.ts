@@ -40,8 +40,8 @@ export const servicePages = [
     evidenceIntroduction: "These documented projects show different reasons a slate covering may need attention. Each example explains the reported problem, inspection findings and completed work without claiming that every roof requires the same solution.",
     evidence: [
       { area: "Christleton", href: "/roof-repairs/christleton", linkLabel: "Read the completed-work case study", image: { src: "/work/slate-gable-completed-repair.jpeg", width: 1600, height: 1200, alt: "Completed Welsh slate and leadwork repair at a stone gable" }, title: "Slate and gable-junction repair", text: "Missing and broken Welsh slates were repaired alongside missing leadwork and cracked ridge components." },
-      { area: "Rowton", href: "/roof-repairs/rowton", linkLabel: "Read the completed-work case study", image: { src: "/work/rowton-flue-slate-repair-completed.jpeg", width: 1600, height: 1200, alt: "Completed slate repair around a boiler flue" }, title: "Slate repair around a boiler flue", text: "An exposed area around a newly installed flue was rebuilt using new supporting layers and serviceable available slates." },
-      { area: "Waverton", href: "/roof-repairs/waverton", linkLabel: "Read the completed-work case study", image: { src: "/work/waverton-chimney-slate-repair-completed.jpeg", width: 1600, height: 1200, alt: "Completed chimney-side repair with two larger Welsh slates" }, title: "Wind-damaged chimney-side slates", text: "Slates lost in high winds led to a local repair of the covering and confirmed deterioration beneath it." }
+      { area: "Rowton", href: "/roof-repairs/rowton", linkLabel: "Read the completed-work case study", image: { src: "/work/boiler-flue-slate-repair-completed.jpeg", width: 1600, height: 1200, alt: "Completed slate repair around a boiler flue" }, title: "Slate repair around a boiler flue", text: "An exposed area around a newly installed flue was rebuilt using new supporting layers and serviceable available slates." },
+      { area: "Waverton", href: "/roof-repairs/waverton", linkLabel: "Read the completed-work case study", image: { src: "/work/chimney-side-slate-repair-completed.jpeg", width: 1600, height: 1200, alt: "Completed chimney-side repair with two larger Welsh slates" }, title: "Wind-damaged chimney-side slates", text: "Slates lost in high winds led to a local repair of the covering and confirmed deterioration beneath it." }
     ],
     note: "Slate type, dimensions, fixing method and the condition beneath the covering vary from roof to roof. A photograph can support an initial review but cannot guarantee that a particular repair method is suitable.",
     faqs: [
@@ -198,7 +198,7 @@ export const servicePages = [
       heading: "Storm damage roof repairs in",
       emphasis: "Christleton, Rowton & Waverton",
       lede: "Repair-led help after high winds and severe weather across Christleton, Rowton and Waverton, including displaced slates or tiles and damage around vulnerable roof details.",
-      image: { src: "/work/waverton-chimney-slate-damage.jpeg", width: 1600, height: 1200, alt: "Roof opening where slates beside a chimney were displaced by high winds" }
+      image: { src: "/work/chimney-side-slate-damage-before.jpeg", width: 1600, height: 1200, alt: "Roof opening where slates beside a chimney were displaced by high winds" }
     },
     introduction: {
       title: "Making the area safe and defining the actual damage",

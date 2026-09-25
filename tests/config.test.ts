@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { readdirSync } from "node:fs";
+import { join } from "node:path";
 import { buildLocationSchema, buildSchema, buildServicePageSchema } from "@/lib/schema";
 import { locations } from "@/lib/locations";
 import { servicePages, servicePath } from "@/lib/service-pages";
@@ -53,6 +55,13 @@ describe("verified central configuration", () => {
       expect(json).toContain("Service");
       for (const area of siteConfig.areas) expect(json).toContain(`${area}, Cheshire, United Kingdom`);
       expect(json.toLowerCase()).not.toContain("chester");
+    }
+  });
+  it("uses neutral, non-location work-image filenames", () => {
+    const filenames = readdirSync(join(process.cwd(), "public", "work"));
+    expect(filenames).not.toHaveLength(0);
+    for (const filename of filenames) {
+      expect(filename).not.toMatch(/christleton|rowton|waverton|chester|newbury/i);
     }
   });
   it("uses an explicit canonical URL before Netlify deployment URLs", () => {
