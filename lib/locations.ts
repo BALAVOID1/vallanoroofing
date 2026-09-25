@@ -66,7 +66,7 @@ export const locations = [
         { src: "/work/rowton-flue-slate-repair-completed.jpeg", width: 1600, height: 1200, alt: "Completed watertight slate repair surrounding a boiler flue on a cottage roof", caption: "Completed work — a practical, watertight covering reinstated with the available slates" }
       ]
     },
-    introduction: "Vallano Roofing is a Chester-based roofer serving Rowton with repair-led help for roof leaks and localised defects. Small repair enquiries are welcome, and the proposed scope is explained before agreed work begins.",
+    introduction: "Vallano Roofing serves Rowton with repair-led help for roof leaks and localised defects. Small repair enquiries are welcome, and the proposed scope is explained before agreed work begins.",
     serviceCopy: "Rowton homeowners can send details of an active leak, damaged roof covering or another localised concern for an initial review. Jamie assesses the available evidence and explains whether the next sensible step is further information or a safe inspection.",
     guidance: {
       title: "What to check when a Rowton roof is damaged around a flue",

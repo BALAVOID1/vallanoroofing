@@ -6,7 +6,7 @@ export function Hero() {
   return <section className="hero" id="repairs" aria-labelledby="hero-heading">
     <div className="shell hero-grid">
       <div className="hero-copy">
-        <p className="eyebrow">Chester-based <span>•</span> Repair-led <span>•</span> Small jobs welcome</p>
+        <p className="eyebrow">Focused local coverage <span>•</span> Repair-led <span>•</span> Small jobs welcome</p>
         <h1 id="hero-heading">Roof repairs in <em>Christleton, Rowton &amp; Waverton</em></h1>
         <p className="hero-lede">Roof leaks, slipped or broken tiles, leadwork, valleys and suitable flat-roof repairs—investigated carefully and repaired with a clear, targeted scope.</p>
         <div className="button-row">

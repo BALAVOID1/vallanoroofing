@@ -4,7 +4,7 @@ import { navItems, siteConfig, whatsappHref } from "@/lib/site-config";
 
 export function Header() {
   return <header className="site-header">
-    <div className="local-strip"><span>Local roof repairs</span><span>Christleton&nbsp; • &nbsp;Rowton&nbsp; • &nbsp;Waverton</span><span>Chester &amp; surrounding areas</span></div>
+    <div className="local-strip"><span>Local roof repairs</span><span>Christleton&nbsp; • &nbsp;Rowton&nbsp; • &nbsp;Waverton</span><span>Three priority service areas</span></div>
     <div className="header-inner shell">
       <a className="logo-link" href="#top" aria-label="Vallano Roofing home">
         <Image src={siteConfig.logo} alt="Vallano Roofing" width={700} height={203} priority unoptimized />

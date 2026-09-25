@@ -44,6 +44,7 @@ describe("verified central configuration", () => {
       expect(json).toContain("FAQPage");
       expect(json).toContain("Service");
       for (const area of siteConfig.areas) expect(json).toContain(`${area}, Cheshire, United Kingdom`);
+      expect(json.toLowerCase()).not.toContain("chester");
     }
   });
   it("uses an explicit canonical URL before Netlify deployment URLs", () => {

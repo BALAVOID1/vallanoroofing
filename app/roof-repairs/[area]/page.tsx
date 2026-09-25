@@ -46,7 +46,7 @@ export default async function LocationPage({ params }: Props) {
   return <>
     <a className="skip-link" href="#main-content">Skip to main content</a>
     <header className="location-header">
-      <div className="local-strip"><span>Local roof repairs</span><span>Christleton&nbsp; • &nbsp;Rowton&nbsp; • &nbsp;Waverton</span><span>Chester &amp; surrounding areas</span></div>
+      <div className="local-strip"><span>Local roof repairs</span><span>Christleton&nbsp; • &nbsp;Rowton&nbsp; • &nbsp;Waverton</span><span>Three priority service areas</span></div>
       <div className="shell location-header-inner">
         <Link className="logo-link" href="/" aria-label="Vallano Roofing home"><Image src={siteConfig.logo} alt="Vallano Roofing" width={700} height={203} priority unoptimized /></Link>
         <nav aria-label="Area page navigation"><Link href="/#services">Services</Link><Link href="/#areas">Areas</Link><Link href="/#faqs">FAQs</Link></nav>

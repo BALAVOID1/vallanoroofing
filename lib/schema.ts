@@ -18,7 +18,7 @@ export function buildSchema() {
         url: root, logo: `${siteConfig.url}${siteConfig.logo}`, image: `${siteConfig.url}/work/tiled-roof-work.webp`,
         telephone: siteConfig.phoneInternational,
         sameAs: socialProfiles,
-        description: "Chester-based, repair-led roofing specialists serving Christleton, Rowton and Waverton.",
+        description: "Repair-led roofing specialists serving Christleton, Rowton and Waverton.",
         areaServed: siteConfig.areas.map((area) => ({ "@type": "Place", name: `${area}, Cheshire, United Kingdom` })),
         hasOfferCatalog: { "@id": `${root}#services` }
       },

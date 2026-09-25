@@ -41,7 +41,6 @@ export const siteConfig = {
   phoneHref: "tel:+447990101321",
   whatsappNumber: "447990101321",
   areas: ["Christleton", "Rowton", "Waverton"] as const,
-  widerArea: "Chester and surrounding areas",
   title: "Roof Repairs Christleton, Rowton & Waverton | Vallano Roofing",
   description: "Repair-led roofing for leaks, tiles, slates, leadwork, valleys and suitable flat roofs across Christleton, Rowton and Waverton. WhatsApp Vallano Roofing.",
   logo: "/brand/vallano-roofing-logo.webp",

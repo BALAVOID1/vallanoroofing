@@ -58,7 +58,7 @@ test("location pages are crawlable, unique and internally linked", async ({ page
     await expect(localStrip).toHaveCount(1);
     await expect(localStrip).toContainText("Local roof repairs");
     await expect(localStrip).toContainText("Christleton • Rowton • Waverton");
-    await expect(localStrip).toContainText("Chester & surrounding areas");
+    await expect(localStrip).toContainText("Three priority service areas");
     await expect(localStrip).toHaveCSS("background-color", "rgb(182, 204, 215)");
     const headerWhatsAppLink = page.locator('.location-header a[href*="wa.me"]');
     await expect(headerWhatsAppLink).toContainText("WhatsApp Jamie");
@@ -166,6 +166,9 @@ test("new service pages are unique, crawlable and internally linked", async ({ p
     expect(sitemap).toContain(`https://vallano.example${path}`);
     await page.goto(path);
     await expect(page).toHaveTitle(title);
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", /Christleton, Rowton and Waverton/);
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", title);
+    await expect(page.locator('meta[property="og:description"]')).toHaveAttribute("content", /Christleton, Rowton and Waverton/);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://vallano.example${path}`);
     await expect(page.locator("h1")).toHaveCount(1);
     await expect(page.locator("h1")).toContainText(heading);
@@ -177,6 +180,8 @@ test("new service pages are unique, crawlable and internally linked", async ({ p
     expect(schema).toContain("BreadcrumbList");
     expect(schema).toContain("FAQPage");
     expect(schema).toContain("Service");
+    expect(schema?.toLowerCase()).not.toContain("chester");
+    await expect(page.locator("body")).not.toContainText(/Chester/i);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
     const accessibility = await new AxeBuilder({ page: page as never }).analyze();
     expect(accessibility.violations).toEqual([]);
