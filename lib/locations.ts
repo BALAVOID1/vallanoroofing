@@ -8,7 +8,7 @@ export const locations = [
     heroImage: { src: "/work/slate-roof-gable-repair-work.jpeg", width: 1200, height: 1600, alt: "Slate roof and stone gable being accessed during Vallano Roofing repair work" },
     workExample: {
       title: "Water-ingress repair at a slate roof and gable",
-      summary: "A homeowner contacted Vallano Roofing after water began entering around the gable end and slates had come away. Inspection found missing sections of leadwork, missing and broken slates, and cracked ridge tiles. The project location is not stated; this example is included to show the defect, repair method and completed detailing.",
+      summary: "A homeowner contacted Vallano Roofing after water began entering around the gable end and slates had come away. Inspection found missing sections of leadwork, missing and broken slates, and cracked ridge tiles.",
       problem: "The customer reported water ingress at the gable end, together with missing slates around the existing lead detail.",
       approach: "Inspection confirmed that sections of leadwork were completely missing, a number of Welsh slates were missing or broken, and cracked ridge tiles were also allowing water to enter.",
       outcome: "The defective area was repaired with new leadwork, replacement Welsh slates and new ridge tiles. The work was cleaned down, photographed and handed over to a customer who was happy with the completed repair.",
