@@ -1,10 +1,29 @@
 import { describe, expect, it } from "vitest";
-import { readdirSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import { buildLocationSchema, buildSchema, buildServicePageSchema } from "@/lib/schema";
+import { buildContentPageSchema, buildLocationSchema, buildSchema, buildServicePageSchema } from "@/lib/schema";
+import { contentPagePath, contentPages } from "@/lib/content-pages";
 import { locations } from "@/lib/locations";
 import { servicePages, servicePath } from "@/lib/service-pages";
 import { resolveSiteOrigin, siteConfig, whatsappHref, whatsappMessage } from "@/lib/site-config";
+import { assessProjectPublicationReadiness, createDraftProject, draftProjects, type DraftProject, type ProjectPhoto, type VerifiedField } from "@/lib/projects";
+
+function verified<T>(value: T): VerifiedField<T> {
+  return { value, verified: true, verifiedAt: "2026-09-28", verifiedBy: "Jamie", sourceNote: "Verified project record" };
+}
+
+function approvedPhoto(stage: ProjectPhoto["stage"]): ProjectPhoto {
+  return {
+    id: `${stage}-photo`, stage,
+    src: verified(`/work/${stage}.webp`),
+    alt: verified(`${stage} stage of the verified roof repair`),
+    visiblyShows: verified(`Verified ${stage} repair stage`),
+    customerPrivacyApproved: true,
+    publicationApproved: true,
+    approvedAt: "2026-09-28",
+    approvedBy: "Jamie"
+  };
+}
 
 describe("verified central configuration", () => {
   it("uses the verified contact targets and encoded message", () => {
@@ -55,6 +74,74 @@ describe("verified central configuration", () => {
       expect(json).toContain("Service");
       for (const area of siteConfig.areas) expect(json).toContain(`${area}, Cheshire, United Kingdom`);
       expect(json.toLowerCase()).not.toContain("chester");
+    }
+  });
+  it("defines published content pages with unique metadata and accurate schema dates", () => {
+    expect(contentPages.map(({ slug }) => slug)).toEqual([
+      "roof-problem-photo-checklist",
+      "roof-leak-investigation",
+      "what-to-do-when-your-roof-leaks",
+      "slipped-or-missing-roof-tiles"
+    ]);
+    expect(new Set(contentPages.map(({ title }) => title)).size).toBe(contentPages.length);
+    expect(new Set(contentPages.map(({ description }) => description)).size).toBe(contentPages.length);
+    for (const page of contentPages) {
+      expect(contentPagePath(page)).toBe(`/${page.slug}`);
+      expect(page.published).toBe("2026-09-28");
+      expect(page.lastModified).toBe("2026-09-28");
+      expect(page.schemaType).toBe("Article");
+      const json = JSON.stringify(buildContentPageSchema(page, page.title));
+      expect(json).toContain('"@type":"Article"');
+      expect(json).toContain('"@type":"BreadcrumbList"');
+      expect(json).toContain("https://vallanoroofing.co.uk/#business");
+      expect(json).toContain('"datePublished":"2026-09-28"');
+      expect(json).toContain('"dateModified":"2026-09-28"');
+    }
+  });
+  it("uses the non-www production canonical", () => {
+    expect(siteConfig.url).toBe("https://vallanoroofing.co.uk");
+  });
+  it("keeps project records private until every field and image is verified", () => {
+    expect(draftProjects).toEqual([]);
+    const incomplete = assessProjectPublicationReadiness(createDraftProject());
+    expect(incomplete.ready).toBe(false);
+    expect(incomplete.issues).toContain("Customer publication consent is required.");
+    expect(incomplete.issues).toContain("Approved before, during and completed photographs are required.");
+
+    const complete: DraftProject = {
+      status: "draft",
+      slug: verified("verified-tile-repair-christleton"),
+      repairType: verified("Tile roof repair"),
+      area: verified("Christleton"),
+      roofType: verified("Tile"),
+      reportedIssue: verified("A displaced roof tile reported by the homeowner"),
+      repairCompleted: verified("The confirmed local tile defect was repaired"),
+      completedMonth: verified("2026-09"),
+      serviceSlug: verified("tile-roof-repairs"),
+      suppliedInformation: verified("Ground-level photographs and a written description"),
+      visibleEvidence: verified("One tile visibly out of alignment"),
+      inspectionFindings: verified("Verified findings from the retained inspection record"),
+      affectedComponent: verified("Local tiled roof covering"),
+      repairSteps: verified(["Verified repair step", "Verified final check"]),
+      outcome: verified("Verified completion outcome"),
+      handoverInformation: verified("Completion photographs supplied"),
+      photos: [approvedPhoto("before"), approvedPhoto("during"), approvedPhoto("completed")],
+      relatedGuideSlugs: verified(["slipped-or-missing-roof-tiles"]),
+      relatedProjectSlugs: verified([]),
+      preciseAddressWithheld: true,
+      customerIdentityWithheld: true,
+      customerPublicationConsent: true,
+      finalFactualReviewComplete: true,
+      finalPrivacyReviewComplete: true
+    };
+    expect(assessProjectPublicationReadiness(complete)).toEqual({ ready: true, issues: [] });
+  });
+  it("does not connect private project drafts to public routes or the sitemap", () => {
+    expect(readFileSync(join(process.cwd(), "app", "sitemap.ts"), "utf8")).not.toContain("projects");
+    const publicRouteFiles = readdirSync(join(process.cwd(), "app"), { recursive: true })
+      .filter((path): path is string => typeof path === "string" && path.endsWith("page.tsx"));
+    for (const path of publicRouteFiles) {
+      expect(readFileSync(join(process.cwd(), "app", path), "utf8")).not.toContain("@/lib/projects");
     }
   });
   it("uses neutral, non-location work-image filenames", () => {

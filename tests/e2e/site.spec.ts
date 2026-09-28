@@ -6,7 +6,7 @@ test("semantic content, metadata and links are valid", async ({ page }) => {
   await expect(page.locator("h1")).toHaveCount(1);
   await expect(page).toHaveTitle("Roof Repairs Christleton, Rowton & Waverton | Vallano Roofing");
   await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", /Repair-led roofing/);
-  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /^https:\/\/vallano\.example\/?$/);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /^https:\/\/vallanoroofing\.co\.uk\/?$/);
   const ids = await page.locator("[id]").evaluateAll(nodes => nodes.map(n => n.id));
   for (const href of await page.locator('a[href^="#"]').evaluateAll(nodes => nodes.map(n => n.getAttribute("href")!))) expect(ids).toContain(href.slice(1));
   const whatsappLinks = await page.locator('a[href*="wa.me"]').evaluateAll(nodes => nodes.map(n => n.getAttribute("href")!));
@@ -25,8 +25,8 @@ test("images, JSON-LD, crawl routes and accessibility pass", async ({ page, requ
   for (const image of await page.locator("img").all()) { expect(await image.getAttribute("alt")).not.toBeNull(); expect(Number(await image.getAttribute("width"))).toBeGreaterThan(0); expect(Number(await image.getAttribute("height"))).toBeGreaterThan(0); }
   const schema = await page.locator('script[type="application/ld+json"]').textContent();
   expect(() => JSON.parse(schema!)).not.toThrow();
-  expect(await (await request.get("/robots.txt")).text()).toContain("https://vallano.example/sitemap.xml");
-  expect(await (await request.get("/sitemap.xml")).text()).toContain("https://vallano.example/");
+  expect(await (await request.get("/robots.txt")).text()).toContain("https://vallanoroofing.co.uk/sitemap.xml");
+  expect(await (await request.get("/sitemap.xml")).text()).toContain("https://vallanoroofing.co.uk/");
   const results = await new AxeBuilder({ page: page as never }).analyze();
   expect(results.violations).toEqual([]);
 });
@@ -50,7 +50,7 @@ test("location pages are crawlable, unique and internally linked", async ({ page
   const sitemap = await (await request.get("/sitemap.xml")).text();
   for (const area of ["christleton", "rowton", "waverton"]) {
     const path = `/roof-repairs/${area}`;
-    expect(sitemap).toContain(`https://vallano.example${path}`);
+    expect(sitemap).toContain(`https://vallanoroofing.co.uk${path}`);
     await page.goto(path);
     await expect(page.locator("h1")).toHaveCount(1);
     await expect(page.locator("h1")).toContainText(new RegExp(area, "i"));
@@ -70,7 +70,7 @@ test("location pages are crawlable, unique and internally linked", async ({ page
     await expect(guidance.locator("h2")).toContainText(new RegExp(area, "i"));
     await expect(guidance.locator(".guidance-grid article")).toHaveCount(3);
     await expect(page.locator(".service-link-grid a")).toHaveCount(6);
-    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://vallano.example${path}`);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://vallanoroofing.co.uk${path}`);
     const schema = await page.locator('script[type="application/ld+json"]').textContent();
     expect(schema).toContain("BreadcrumbList");
     expect(schema).toContain("Service");
@@ -168,7 +168,7 @@ test("new service pages are unique, crawlable and internally linked", async ({ p
 
   for (const [slug, title, heading, introduction] of services) {
     const path = `/${slug}`;
-    expect(sitemap).toContain(`https://vallano.example${path}`);
+    expect(sitemap).toContain(`https://vallanoroofing.co.uk${path}`);
     await page.goto(path);
     await expect(page).toHaveTitle(title);
     await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", /Christleton, Rowton and Waverton/);
@@ -176,7 +176,7 @@ test("new service pages are unique, crawlable and internally linked", async ({ p
     await expect(page.locator('meta[property="og:description"]')).toHaveAttribute("content", /Christleton, Rowton and Waverton/);
     await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute("content", title);
     await expect(page.locator('meta[name="twitter:description"]')).toHaveAttribute("content", /Christleton, Rowton and Waverton/);
-    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://vallano.example${path}`);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://vallanoroofing.co.uk${path}`);
     await expect(page.locator("h1")).toHaveCount(1);
     await expect(page.locator("h1")).toContainText(heading);
     await expect(page.locator("#service-introduction-heading")).toContainText(introduction);
@@ -199,6 +199,55 @@ test("new service pages are unique, crawlable and internally linked", async ({ p
     await expect(page.locator(`#services a[href="/${slug}"]`)).toHaveCount(1);
     await expect(page.locator(`footer a[href="/${slug}"]`)).toHaveCount(1);
   }
+});
+
+test("guide pages have exact metadata, schema, dates and incoming links", async ({ page, request }) => {
+  const guides = [
+    ["/roof-problem-photo-checklist", "What Photos to Send | Vallano Roofing", "What photos help me assess your roof problem"],
+    ["/roof-leak-investigation", "Roof Leak Investigation | Vallano Roofing", "How a roof leak is actually investigated"],
+    ["/what-to-do-when-your-roof-leaks", "What to Do When Your Roof Leaks | Vallano Roofing", "What to do when your roof starts leaking"],
+    ["/slipped-or-missing-roof-tiles", "Slipped or Missing Roof Tiles | Vallano Roofing", "What to do about slipped or missing roof tiles"]
+  ] as const;
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+
+  for (const [path, title, heading] of guides) {
+    expect(sitemap).toContain(`https://vallanoroofing.co.uk${path}`);
+    await page.goto(path);
+    await expect(page).toHaveTitle(title);
+    await expect(page.locator("h1")).toHaveText(heading);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://vallanoroofing.co.uk${path}`);
+    const schema = JSON.parse((await page.locator('script[type="application/ld+json"]').textContent())!);
+    expect(schema["@graph"].some((entry: { "@type": string }) => entry["@type"] === "Article")).toBe(true);
+    expect(schema["@graph"].some((entry: { "@type": string }) => entry["@type"] === "BreadcrumbList")).toBe(true);
+    expect(JSON.stringify(schema)).toContain("https://vallanoroofing.co.uk/#business");
+    expect(JSON.stringify(schema)).toContain('"datePublished":"2026-09-28"');
+    expect(JSON.stringify(schema)).toContain('"dateModified":"2026-09-28"');
+  }
+
+  for (const path of [
+    "/slate-roof-repairs", "/chimney-flashing-repairs", "/leadwork-repairs",
+    "/storm-damage-roof-repairs", "/tile-roof-repairs", "/flat-roof-repairs",
+    "/roof-repairs/christleton", "/roof-repairs/rowton", "/roof-repairs/waverton"
+  ]) {
+    await page.goto(path);
+    for (const [guidePath] of guides) await expect(page.locator(`a[href="${guidePath}"]`)).toHaveCount(3);
+    await expect(page.locator(".final-cta .cta-guide-links")).toHaveCount(1);
+  }
+
+  await page.goto("/what-to-do-when-your-roof-leaks");
+  await expect(page.locator("main")).toContainText("keep people safe and limit avoidable internal damage");
+  await expect(page.locator("main")).toContainText("Do not touch wet electrics");
+  await expect(page.locator('main a[href="/roof-leak-investigation"]')).toHaveCount(1);
+  await expect(page.locator('main a[href="/roof-problem-photo-checklist"]')).toHaveCount(1);
+  await expect(page.locator('main a[href^="/roof-repairs/"]')).toHaveCount(3);
+  await expect(page.locator("main")).not.toContainText("Which way the wind was blowing when the leak appeared");
+
+  await page.goto("/slipped-or-missing-roof-tiles");
+  await expect(page.locator("main")).toContainText("Warning signs you can look for from ground level");
+  await expect(page.locator("main")).toContainText("Never climb onto the roof");
+  await expect(page.locator('main a[href="/tile-roof-repairs"]')).toHaveCount(1);
+  await expect(page.locator('main a[href="/storm-damage-roof-repairs"]')).toHaveCount(1);
+  await expect(page.locator('main a[href^="/roof-repairs/"]')).toHaveCount(3);
 });
 
 test("service pages use verified project evidence without unsupported locations", async ({ page }) => {

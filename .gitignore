@@ -5,3 +5,4 @@ test-results
 .env
 *.tsbuildinfo
 .DS_Store
+.private/

@@ -1,4 +1,5 @@
 const FALLBACK_DEV_URL = "http://localhost:3000";
+export const canonicalSiteUrl = "https://vallanoroofing.co.uk";
 
 type SiteEnvironment = Partial<Record<
   "SITE_URL" | "NEXT_PUBLIC_SITE_URL" | "URL" | "DEPLOY_PRIME_URL" | "DEPLOY_URL" | "NODE_ENV",
@@ -35,7 +36,7 @@ export const whatsappMessage = "Hello Jamie, I need help with a roof problem. My
 export const siteConfig = {
   name: "Vallano Roofing",
   contactName: "Jamie",
-  url: resolveSiteOrigin(),
+  url: canonicalSiteUrl,
   phoneDisplay: "07990 101321",
   phoneInternational: "+44 7990 101321",
   phoneHref: "tel:+447990101321",

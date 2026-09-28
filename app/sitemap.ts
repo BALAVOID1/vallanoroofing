@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
 import { locationPath, locations } from "@/lib/locations";
 import { servicePages, servicePath } from "@/lib/service-pages";
+import { contentPagePath, contentPages } from "@/lib/content-pages";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date("2026-09-25");
@@ -18,6 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "monthly" as const,
       priority: 0.8
+    })),
+    ...contentPages.filter(({ published }) => Boolean(published)).map((page) => ({
+      url: `${siteConfig.url}${contentPagePath(page)}`,
+      lastModified: new Date(page.lastModified),
+      changeFrequency: "monthly" as const,
+      priority: 0.7
     }))
   ];
 }

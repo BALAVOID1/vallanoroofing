@@ -6,6 +6,7 @@ import { ContactLink } from "@/components/ContactLink";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { MobileContactBar } from "@/components/MobileContactBar";
+import { GuideLinks } from "@/components/GuideLinks";
 import { locations, locationPath } from "@/lib/locations";
 import { buildServicePageSchema } from "@/lib/schema";
 import { getServicePage, servicePages, servicePath } from "@/lib/service-pages";
@@ -85,7 +86,9 @@ export default async function ServicePageRoute({ params }: Props) {
 
       <section className="section section-light related-service" aria-labelledby="related-service-heading"><div className="shell location-intro"><div><p className="section-label">Related roof repair service</p><h2 id="related-service-heading">Read about {otherService.name.toLowerCase()}</h2></div><div><p>{otherService.description}</p><Link className="button button-brand" href={servicePath(otherService)}>View {otherService.name.toLowerCase()} <span aria-hidden="true">→</span></Link></div></div></section>
 
-      <section className="final-cta" aria-labelledby="service-cta-heading"><div className="shell"><div><p>Need help with {service.name.toLowerCase()}?</p><h2 id="service-cta-heading">Send your Christleton, Rowton or Waverton property details</h2><p>Include the postcode, a short description and any photographs you can take safely.</p></div><div><ContactLink className="button button-white" href={whatsappHref()} target="_blank" rel="noopener noreferrer" kind="whatsapp" placement="service_footer">Start on WhatsApp <span aria-hidden="true">→</span></ContactLink><ContactLink href={siteConfig.phoneHref} kind="phone" placement="service_footer">or call {siteConfig.phoneDisplay}</ContactLink></div></div></section>
+      <GuideLinks />
+
+      <section className="final-cta" aria-labelledby="service-cta-heading"><div className="shell"><div><p>Need help with {service.name.toLowerCase()}?</p><h2 id="service-cta-heading">Send your Christleton, Rowton or Waverton property details</h2><p>Include the postcode, a short description and any photographs you can take safely.</p></div><div><ContactLink className="button button-white" href={whatsappHref()} target="_blank" rel="noopener noreferrer" kind="whatsapp" placement="service_footer">Start on WhatsApp <span aria-hidden="true">→</span></ContactLink><ContactLink href={siteConfig.phoneHref} kind="phone" placement="service_footer">or call {siteConfig.phoneDisplay}</ContactLink><GuideLinks compact /></div></div></section>
     </main>
     <Footer />
     <MobileContactBar />

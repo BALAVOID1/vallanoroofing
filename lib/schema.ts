@@ -4,6 +4,8 @@ import type { Location } from "./locations";
 import { locationPath } from "./locations";
 import type { ServicePage } from "./service-pages";
 import { servicePath } from "./service-pages";
+import type { ContentPage } from "./content-pages";
+import { contentPagePath } from "./content-pages";
 
 export function buildSchema() {
   const root = `${siteConfig.url}/`;
@@ -120,6 +122,52 @@ export function buildServicePageSchema(service: ServicePage) {
         mainEntity: service.faqs.map(([name, answer]) => ({
           "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text: answer }
         }))
+      }
+    ]
+  };
+}
+
+export function buildContentPageSchema(page: ContentPage, headline: string) {
+  const root = `${siteConfig.url}/`;
+  const url = `${siteConfig.url}${contentPagePath(page)}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "RoofingContractor",
+        "@id": `${root}#business`,
+        name: siteConfig.name,
+        url: root,
+        telephone: siteConfig.phoneInternational,
+        logo: `${siteConfig.url}${siteConfig.logo}`,
+        description: "Repair-led roofing specialists serving Christleton, Rowton and Waverton.",
+        areaServed: siteConfig.areas.map((area) => ({ "@type": "Place", name: `${area}, Cheshire, United Kingdom` }))
+      },
+      {
+        "@type": page.schemaType,
+        "@id": `${url}#article`,
+        headline,
+        description: page.description,
+        url,
+        mainEntityOfPage: url,
+        datePublished: page.published,
+        dateModified: page.lastModified,
+        author: { "@id": `${root}#business` },
+        publisher: { "@id": `${root}#business` },
+        about: [
+          { "@id": `${root}#business` },
+          { "@type": "Thing", name: "Roof repairs" }
+        ],
+        breadcrumb: { "@id": `${url}#breadcrumb` }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${url}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: root },
+          { "@type": "ListItem", position: 2, name: headline, item: url }
+        ]
       }
     ]
   };
