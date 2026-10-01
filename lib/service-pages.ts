@@ -252,6 +252,65 @@ export const servicePages = [
     ]
   },
   {
+    slug: "roof-valley-repairs",
+    name: "Roof valley repairs",
+    title: "Roof Valley Repairs in Christleton, Rowton & Waverton | Vallano Roofing",
+    description: "Roof valley leak investigation and targeted repairs in Christleton, Rowton and Waverton for blocked, cracked, damaged or leaking valleys.",
+    hero: {
+      eyebrow: "Repair-first valley leak investigation",
+      heading: "Roof Valley Repairs in",
+      emphasis: "Christleton, Rowton & Waverton",
+      lede: "Local help with leaking roof valleys, damaged or blocked channels, cracked valley liners, lead valley defects and water ingress where tiles or slates meet the valley.",
+      image: { src: "/work/dormer-cheek-valley-before-detail.webp", width: 1200, height: 1600, alt: "Roof valley junction and surrounding tiled covering inspected before repair work" }
+    },
+    introduction: {
+      title: "A targeted valley repair where the surrounding roof remains serviceable",
+      paragraphs: [
+        "A roof valley carries rainwater from two adjoining slopes, so a local defect can admit a significant amount of water. Vallano Roofing investigates the valley itself, its edges and the nearby tile or slate covering before recommending work.",
+        "A leaking valley does not automatically mean the whole roof needs replacing. Where the defect is localised and the surrounding roof remains serviceable, Vallano prioritises a clearly scoped repair rather than pushing unnecessary replacement.",
+        "Photos help us understand the visible issue before Jamie confirms the next step, but they cannot show every concealed lap, fixing, underlay or supporting timber. A safe inspection may be needed before a cause or quote can be confirmed."
+      ]
+    },
+    signs: {
+      title: "Signs your roof valley may be leaking",
+      introduction: "Observe the roof and any internal marks only from a safe position. Never climb onto the roof or try to clear a valley yourself.",
+      items: [
+        { title: "Damp below the line of a valley", text: "Staining on a ceiling, in a loft or where two roof slopes meet can justify investigation, although water may travel before it becomes visible inside." },
+        { title: "Cracks, movement or open joints", text: "A split liner, displaced valley section, failed lap or gaps where tiles or slates meet the channel can provide a route for wind-driven rain." },
+        { title: "Debris or water backing up", text: "Leaves, mortar fragments or slipped coverings can restrict the channel. Overflow marks or water appearing mainly in heavy rain may indicate that the valley is not draining as intended." }
+      ]
+    },
+    approach: {
+      title: "What Vallano checks before quoting a valley repair",
+      items: [
+        { title: "Trace", text: "Review when and where water appears, the rainfall and wind conditions, internal staining and safe photographs before deciding what needs closer inspection." },
+        { title: "Inspect", text: "Check the accessible valley lining, laps, top and lower outlets, surrounding tiles or slates, mortar or cut edges, flashings and visible supporting layers." },
+        { title: "Define", text: "Separate a local valley defect from water arriving from a higher junction, then explain the confirmed findings and proposed repair scope before work starts." }
+      ]
+    },
+    valleyDetails: {
+      commonProblems: [
+        ["Blocked valley channels", "Leaves, moss fragments, broken mortar or displaced material can slow the flow and make rainwater back up beneath the adjacent covering."],
+        ["Cracked or deteriorated liners", "Lead, metal, GRP or other valley materials can split, crack, corrode or fail at a lap, depending on their age, installation and movement."],
+        ["Defects at tile or slate junctions", "Poorly supported cuts, slipped coverings, failed fixings or gaps beside the channel can allow water past the intended weathering detail."],
+        ["Faults above or below the visible valley", "Water can enter at the valley head, a dormer, flashing or another junction and track towards the internal mark, so the obvious wet area is not always the source."]
+      ],
+      repairTypes: [
+        ["Local liner or lap repair", "Repair or renew a confirmed local section where the material and surrounding condition make that approach suitable."],
+        ["Lead valley work", "Repair or replace defective lead details using a scope appropriate to the confirmed split, failed lap or junction."],
+        ["Tile or slate reinstatement", "Securely reinstate or replace affected coverings beside the valley and address confirmed local defects in fixings, battens or underlay."],
+        ["Careful clearance", "Remove accessible obstructions as part of an agreed repair where debris is contributing to restricted flow, without presenting this as a roof-cleaning service."]
+      ]
+    },
+    faqs: [
+      ["How do I know whether my roof valley is leaking?", "Damp near the meeting line of two roof slopes, staining after heavy rain, visible cracks or displaced coverings can justify investigation. The internal mark may not sit directly below the entry point, so the cause needs to be traced."],
+      ["Can a cracked valley liner be repaired?", "A local repair may be suitable in some cases, but the liner material, position and extent of deterioration must be checked. A wider defective section may require a different scope."],
+      ["Can a blocked valley cause water ingress?", "Yes. Debris can restrict the channel and make water back up beneath adjacent tiles or slates. The valley and surrounding details should still be checked rather than assuming clearance alone will resolve the leak."],
+      ["Can you quote for a valley repair from photographs?", "Photos help Jamie understand the issue and decide the sensible next step, but they may not show concealed laps, supporting layers or where water first entered. A safe inspection may be required before a quote is confirmed."],
+      ["Do you repair roof valleys in Christleton, Rowton and Waverton?", "Yes. Vallano Roofing welcomes roof valley repair enquiries across Christleton, Rowton, Waverton, CH3 and surrounding Chester areas, subject to access and availability. No emergency attendance time is guaranteed."]
+    ]
+  },
+  {
     slug: "tile-roof-repairs",
     name: "Tile roof repairs",
     title: "Tile Roof Repairs in Christleton, Rowton & Waverton | Vallano Roofing",

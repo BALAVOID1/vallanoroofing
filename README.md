@@ -4,14 +4,15 @@ Production-focused local roofing website built with Next.js 15 App Router, React
 
 ## Public website
 
-The production build contains 14 public, indexable content pages:
+The production build contains 15 public, indexable content pages:
 
 - Homepage: `/`
-- Six service pages:
+- Seven service pages:
   - `/slate-roof-repairs`
   - `/chimney-flashing-repairs`
   - `/leadwork-repairs`
   - `/storm-damage-roof-repairs`
+  - `/roof-valley-repairs`
   - `/tile-roof-repairs`
   - `/flat-roof-repairs`
 - Three priority-area pages:

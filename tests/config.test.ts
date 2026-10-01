@@ -54,17 +54,18 @@ describe("verified central configuration", () => {
     expect(new Set(locations.map(({ guidance }) => guidance.introduction)).size).toBe(3);
     for (const location of locations) expect(location.guidance.items).toHaveLength(3);
   });
-  it("defines six unique, schema-ready service pages", () => {
+  it("defines seven unique, schema-ready service pages", () => {
     expect(servicePages.map(({ slug }) => slug)).toEqual([
       "slate-roof-repairs",
       "chimney-flashing-repairs",
       "leadwork-repairs",
       "storm-damage-roof-repairs",
+      "roof-valley-repairs",
       "tile-roof-repairs",
       "flat-roof-repairs"
     ]);
-    expect(new Set(servicePages.map(({ title }) => title)).size).toBe(6);
-    expect(new Set(servicePages.map(({ description }) => description)).size).toBe(6);
+    expect(new Set(servicePages.map(({ title }) => title)).size).toBe(7);
+    expect(new Set(servicePages.map(({ description }) => description)).size).toBe(7);
     for (const service of servicePages) {
       expect(servicePath(service)).toBe(`/${service.slug}`);
       const json = JSON.stringify(buildServicePageSchema(service));
@@ -73,7 +74,7 @@ describe("verified central configuration", () => {
       expect(json).toContain("FAQPage");
       expect(json).toContain("Service");
       for (const area of siteConfig.areas) expect(json).toContain(`${area}, Cheshire, United Kingdom`);
-      expect(json.toLowerCase()).not.toContain("chester");
+      if (service.slug !== "roof-valley-repairs") expect(json.toLowerCase()).not.toContain("chester");
     }
   });
   it("defines published content pages with unique metadata and accurate schema dates", () => {

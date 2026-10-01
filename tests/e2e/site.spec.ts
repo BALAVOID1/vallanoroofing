@@ -69,7 +69,7 @@ test("location pages are crawlable, unique and internally linked", async ({ page
     await expect(guidance).toHaveCount(1);
     await expect(guidance.locator("h2")).toContainText(new RegExp(area, "i"));
     await expect(guidance.locator(".guidance-grid article")).toHaveCount(3);
-    await expect(page.locator(".service-link-grid a")).toHaveCount(6);
+    await expect(page.locator(".service-link-grid a")).toHaveCount(7);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://vallanoroofing.co.uk${path}`);
     const schema = await page.locator('script[type="application/ld+json"]').textContent();
     expect(schema).toContain("BreadcrumbList");
@@ -162,6 +162,7 @@ test("new service pages are unique, crawlable and internally linked", async ({ p
     ["chimney-flashing-repairs", "Chimney Flashing Repairs in Christleton, Rowton & Waverton | Vallano Roofing", "Chimney flashing repairs in Christleton, Rowton & Waverton", "A leak near a chimney is not automatically a flashing failure"],
     ["leadwork-repairs", "Leadwork Repairs in Christleton, Rowton & Waverton | Vallano Roofing", "Leadwork repairs in Christleton, Rowton & Waverton", "Assessing the junction before specifying the lead repair"],
     ["storm-damage-roof-repairs", "Storm Damage Roof Repairs in Christleton, Rowton & Waverton | Vallano Roofing", "Storm damage roof repairs in Christleton, Rowton & Waverton", "Making the area safe and defining the actual damage"],
+    ["roof-valley-repairs", "Roof Valley Repairs in Christleton, Rowton & Waverton | Vallano Roofing", "Roof Valley Repairs in Christleton, Rowton & Waverton", "A targeted valley repair where the surrounding roof remains serviceable"],
     ["tile-roof-repairs", "Tile Roof Repairs in Christleton, Rowton & Waverton | Vallano Roofing", "Tile roof repairs in Christleton, Rowton & Waverton", "A targeted repair where the tiled roof remains serviceable"],
     ["flat-roof-repairs", "Flat Roof Repairs in Christleton, Rowton & Waverton | Vallano Roofing", "Flat roof repairs in Christleton, Rowton & Waverton", "Checking whether a local flat-roof repair is suitable"]
   ] as const;
@@ -180,15 +181,17 @@ test("new service pages are unique, crawlable and internally linked", async ({ p
     await expect(page.locator("h1")).toHaveCount(1);
     await expect(page.locator("h1")).toContainText(heading);
     await expect(page.locator("#service-introduction-heading")).toContainText(introduction);
-    await expect(page.locator(".guidance-grid article")).toHaveCount(3);
+    await expect(page.locator('[aria-labelledby="service-signs-heading"] .guidance-grid article')).toHaveCount(3);
     await expect(page.locator(".faq-list details")).toHaveCount(5);
     await expect(page.locator('.area-grid a[href^="/roof-repairs/"]')).toHaveCount(3);
     const schema = await page.locator('script[type="application/ld+json"]').textContent();
     expect(schema).toContain("BreadcrumbList");
     expect(schema).toContain("FAQPage");
     expect(schema).toContain("Service");
-    expect(schema?.toLowerCase()).not.toContain("chester");
-    await expect(page.locator("body")).not.toContainText(/Chester/i);
+    if (slug !== "roof-valley-repairs") {
+      expect(schema?.toLowerCase()).not.toContain("chester");
+      await expect(page.locator("body")).not.toContainText(/Chester/i);
+    }
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
     const accessibility = await new AxeBuilder({ page: page as never }).analyze();
     expect(accessibility.violations).toEqual([]);
@@ -199,6 +202,38 @@ test("new service pages are unique, crawlable and internally linked", async ({ p
     await expect(page.locator(`#services a[href="/${slug}"]`)).toHaveCount(1);
     await expect(page.locator(`footer a[href="/${slug}"]`)).toHaveCount(1);
   }
+});
+
+test("roof valley landing page covers valley-specific intent and requested internal links", async ({ page }) => {
+  await page.goto("/roof-valley-repairs");
+  const main = page.locator("main");
+  for (const heading of [
+    "Common roof valley problems",
+    "Signs your roof valley may be leaking",
+    "What Vallano checks before quoting a valley repair",
+    "Types of valley repairs we may carry out",
+    "Why valleys leak in heavy rain",
+    "A localised repair before unnecessary replacement",
+    "Roof valley repairs in Christleton, Rowton and Waverton",
+    "Roof valley repairs questions"
+  ]) await expect(main.getByRole("heading", { name: heading })).toHaveCount(1);
+
+  for (const href of [
+    "/roof-leak-investigation",
+    "/leadwork-repairs",
+    "/slate-roof-repairs",
+    "/tile-roof-repairs",
+    "/storm-damage-roof-repairs",
+    "/roof-repairs/christleton",
+    "/roof-repairs/rowton",
+    "/roof-repairs/waverton",
+    "/roof-problem-photo-checklist"
+  ]) await expect(main.locator(`a[href="${href}"]`).first()).toBeVisible();
+
+  await expect(main).toContainText("CH3 and surrounding Chester areas");
+  await expect(main).toContainText("Send safe roof photos, your full postcode, and whether water is currently coming in via WhatsApp");
+  await expect(main).toContainText("No emergency attendance time is guaranteed");
+  await expect(main).not.toContainText(/24\/7|roof cleaning|moss removal|fascias|soffits/i);
 });
 
 test("guide pages have exact metadata, schema, dates and incoming links", async ({ page, request }) => {

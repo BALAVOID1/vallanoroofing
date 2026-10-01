@@ -7,7 +7,7 @@ export function Services() {
     ["storm-damage-roof-repairs"],
     ["slate-roof-repairs", "tile-roof-repairs"],
     ["leadwork-repairs", "chimney-flashing-repairs"],
-    [],
+    ["roof-valley-repairs"],
     ["flat-roof-repairs"],
     []
   ];
