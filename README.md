@@ -52,6 +52,10 @@ Run the production build before `typecheck` when `.next/types` has not yet been 
 
 At the platform and DNS layers, permanently redirect HTTP and the alternate `www` hostname to the canonical non-www HTTPS origin while preserving paths and query strings.
 
+Netlify must keep `vallanoroofing.co.uk` set as the **primary domain**. Netlify then automatically redirects the alternate `www` hostname to the apex host. Consequently, Search Console may list `https://www.vallanoroofing.co.uk/...` URLs as **Page with redirect**; this is intentional and those alternate URLs should not be submitted for indexing. The corresponding `https://vallanoroofing.co.uk/...` URL is the indexable page.
+
+Do not add a second application redirect for the `www` hostname while Netlify's primary-domain redirect is enabled. Duplicate host rules can create redirect conflicts or loops. If Search Console reports **Redirect error**, first verify the Netlify primary domain, DNS, TLS certificate and full redirect chain, then validate the canonical URL rather than the redirected variant.
+
 ## Content and structured data
 
 - Business data and contact targets are centralised in `lib/site-config.ts`.
@@ -84,6 +88,13 @@ Before committing or deploying:
 5. Review the complete working-tree diff and untracked-file list.
 
 After deployment, verify the live canonical redirects, all public routes, `robots.txt` and `sitemap.xml`. Validate structured data using Schema.org Validator and Google Rich Results Test, run a mobile Lighthouse audit and submit the sitemap through Google Search Console and Bing Webmaster Tools.
+
+Expected production responses are:
+
+- `https://vallanoroofing.co.uk/<path>` → `200`
+- `https://www.vallanoroofing.co.uk/<path>` → one permanent redirect to `https://vallanoroofing.co.uk/<path>`
+- `http://vallanoroofing.co.uk/<path>` → a permanent redirect to `https://vallanoroofing.co.uk/<path>`
+- `http://www.vallanoroofing.co.uk/<path>` → permanent redirects ending at `https://vallanoroofing.co.uk/<path>`; Netlify may perform HTTPS and primary-domain canonicalisation as separate hops
 
 ## Future location and project pages
 

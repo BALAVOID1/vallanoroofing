@@ -48,10 +48,18 @@ test("has no horizontal overflow and keyboard-operable CTAs", async ({ page }) =
 
 test("location pages are crawlable, unique and internally linked", async ({ page, request }) => {
   const sitemap = await (await request.get("/sitemap.xml")).text();
+  expect(sitemap).not.toContain("https://www.vallanoroofing.co.uk");
   for (const area of ["christleton", "rowton", "waverton"]) {
     const path = `/roof-repairs/${area}`;
     expect(sitemap).toContain(`https://vallanoroofing.co.uk${path}`);
-    await page.goto(path);
+    const response = await page.goto(path);
+    expect(response?.status()).toBe(200);
+    expect(response?.url()).toBe(`http://127.0.0.1:3000${path}`);
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /index/);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      "href",
+      `https://vallanoroofing.co.uk${path}`
+    );
     await expect(page.locator("h1")).toHaveCount(1);
     await expect(page.locator("h1")).toContainText(new RegExp(area, "i"));
     const localStrip = page.locator(".location-header .local-strip");
